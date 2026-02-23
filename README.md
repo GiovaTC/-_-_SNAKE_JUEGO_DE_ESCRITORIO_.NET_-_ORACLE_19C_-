@@ -1,7 +1,9 @@
 # -_-_SNAKE_JUEGO_DE_ESCRITORIO_.NET_-_ORACLE_19C_- :.  
 # 🐍 SNAKE – JUEGO DE ESCRITORIO (.NET + ORACLE 19c):
 
-<img width="1024" height="1024" alt="image" src="https://github.com/user-attachments/assets/452dad59-4829-4d07-8a86-14edf0396826" />  
+<img width="1024" height="1024" alt="image" src="https://github.com/user-attachments/assets/452dad59-4829-4d07-8a86-14edf0396826" />    
+
+<img width="2548" height="1079" alt="image" src="https://github.com/user-attachments/assets/a2b26438-3a23-4380-9b65-0a41b1ebce9d" />        
 
 Implementación **completa y profesional** de un juego **Snake en C# (.NET 6)** usando **Visual Studio 2022**,  
 con **registro de resultados en Oracle 19c mediante Stored Procedure (SP)**.
