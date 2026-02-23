@@ -1,4 +1,6 @@
-namespace snake_game_II
+using snake_game;
+
+namespace snake_game
 {
     internal static class Program
     {
