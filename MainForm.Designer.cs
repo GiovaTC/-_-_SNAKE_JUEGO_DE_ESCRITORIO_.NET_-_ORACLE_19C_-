@@ -43,6 +43,7 @@
             gamePanel.Name = "gamePanel";
             gamePanel.Size = new System.Drawing.Size(500, 350);
             gamePanel.TabIndex = 0;
+            gamePanel.Paint += gamePanel_Paint;   // 🔹 AÑADIDO
 
             // 
             // lblScore

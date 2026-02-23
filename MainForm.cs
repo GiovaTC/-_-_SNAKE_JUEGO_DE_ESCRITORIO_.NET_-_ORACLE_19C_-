@@ -1,10 +1,8 @@
-using snake_game;
-using snake_game.Db;
-using snake_game.Models;
-using snake_game.Db;
-using snake_game.Models;
-using System;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
+using snake_game.Db;
+using snake_game.Models;
 
 namespace snake_game
 {
@@ -17,39 +15,63 @@ namespace snake_game
             InitializeComponent();
         }
 
-        // Carga inicial del formulario
+        // 🔹 Carga inicial
         private void MainForm_Load(object sender, EventArgs e)
         {
             KeyPreview = true;
             lblScore.Text = "Score: 0";
+
+            game.Start(gamePanel.Size);   // 🔹 Inicializa comida
+            gameTimer.Start();            // 🔹 Inicia loop
         }
 
-        // Simulaci�n del juego (luego se conecta a Snake / Food)
+        // 🔹 Loop real del juego
         private void gameTimer_Tick(object sender, EventArgs e)
         {
-            // Simulaci�n simple: el jugador "come"
-            game.EatFood();
+            game.Update(gamePanel.Size);
 
-            lblScore.Text = $"Score: {game.Score}";
-
-            // Condici�n de Game Over (ejemplo)
-            if (game.Score >= 100)
+            if (game.GameOver)
             {
                 gameTimer.Stop();
                 GameOver();
+                return;
             }
+
+            lblScore.Text = $"Score: {game.Score}";
+            gamePanel.Invalidate();   // 🔹 Repintar
         }
 
-        // Control por teclado (base para el Snake real)
+        // 🔹 Control del Snake
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Space)
-            {
-                gameTimer.Start();
-            }
+            game.Snake.ChangeDirection(e.KeyCode);
         }
 
-        // Fin del juego + guardado en Oracle
+        // 🔹 Renderizado real
+        private void gamePanel_Paint(object sender, PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+
+            // Snake
+            foreach (var p in game.Snake.Body)
+            {
+                g.FillRectangle(
+                    Brushes.LimeGreen,
+                    p.X, p.Y,
+                    18, 18
+                );
+            }
+
+            // Food
+            g.FillEllipse(
+                Brushes.Red,
+                game.Food.Position.X,
+                game.Food.Position.Y,
+                18, 18
+            );
+        }
+
+        // 🔹 Fin del juego + Oracle
         private void GameOver()
         {
             game.EndGame();
